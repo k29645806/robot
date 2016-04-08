@@ -27,7 +27,7 @@ class Robot(object):
         port = rospy.get_param("~port", "/dev/ttyACM0")
         baud_rate = int(rospy.get_param("~baudRate", 115200))
         self.robotSerial = SerialDataGateway(port, baud_rate, self._handle_received_line)
-#-------------------------------------------------------------------------------
+#testing---------------testing--------testing------
     def _handle_received_line(self, line):
         """
         This will run every time a line is received over the serial port (USB)
