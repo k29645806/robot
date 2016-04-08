@@ -33,8 +33,8 @@ class Robot(object):
     def simulation(self,data):
         # Simulation odometry!
         v, w, dt = data.linear.x, data.angular.z, 0.1
-        self.sim_x += (v*dt)*cos(self.sim_yaw*dt)
-        self.sim_y += (v*dt)*sin(self.sim_yaw*dt)
+        self.sim_x += (v*dt)*cos(self.sim_yaw)
+        self.sim_y += (v*dt)*sin(self.sim_yaw)
         self.sim_yaw += w*dt
         self.sim_v = v
         self.sim_w = w
@@ -97,7 +97,7 @@ class Robot(object):
         while not rospy.is_shutdown():
             self.broadcastTF()
             self.publishOdometry()
-            self.publishLaserScan()
+            #self.publishLaserScan()
             rate.sleep()
 
 
