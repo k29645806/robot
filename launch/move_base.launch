@@ -14,4 +14,7 @@
     <rosparam file="$(find robot)/yaml/global_costmap_params.yaml" command="load" />
     <rosparam file="$(find robot)/yaml/base_local_planner_params.yaml" command="load" />
   </node>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot)/rviz/robot_navigation.rviz"/>
+
 </launch>
