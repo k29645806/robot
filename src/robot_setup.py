@@ -5,10 +5,10 @@ import rospy
 import tf
 from tf.transformations import quaternion_from_euler
 from std_msgs.msg import Header, String
-from geometry_msgs.msg import Quaternion
+from geometry_msgs.msg import Quaternion, Twist, Vector3
 from nav_msgs.msg import Odometry
 from sensor_msgs.msg import LaserScan
-from math import radians
+from math import radians,cos,sin
 from SerialDataGateway import SerialDataGateway
 
 '''
@@ -24,49 +24,23 @@ class Robot(object):
         self.tfBroadcaster = tf.TransformBroadcaster()
         self.odomPublisher = rospy.Publisher('odom',Odometry, queue_size=10)
         self.laserScanPublisher = rospy.Publisher('laserScan',LaserScan, queue_size=10)
-        port = rospy.get_param("~port", "/dev/ttyACM0")
-        baud_rate = int(rospy.get_param("~baudRate", 115200))
-        self.robotSerial = SerialDataGateway(port, baud_rate, self._handle_received_line)
-#-------------------------------------------------------------------------------
-    def _handle_received_line(self, line):
-        """
-        This will run every time a line is received over the serial port (USB)
-        from the Propeller board and will send the data to the correct function.
-        """
-        self.serialReadData = str(line)
+        #port = rospy.get_param("~port", "/dev/ttyACM0")
+        #baud_rate = int(rospy.get_param("~baudRate", 115200))
+        #self.robotSerial = SerialDataGateway(port, baud_rate, self._handle_received_line)
+        rospy.Subscriber("cmd_vel", Twist, self.simulation)
+        self.sim_x, self.sim_y, self.sim_yaw, self.sim_v, self.sim_w = 0.0, 0.0, 0.0, 0.0, 0.0    # start point
+#------------------------------simulation-------------------------------------
+    def simulation(self,data):
+        v, w, dt = data.linear.x, data.angular.z, 0.1
+        self.sim_x += (v*dt)*cos(w*dt)
+        self.sim_y += (v*dt)*sin(w*dt)
+        self.sim_yaw += w*dt
+        self.sim_v = v
+        self.sim_w = w
 
-    def _handle_robot_command(self, cmd):
-        rate = rospy.Rate(10.0)
-        if (self.available == True):
-            cmdData = map(int, cmd.data.split(",")) # chnage string to integer
-            output = []
-            output.append(0xc9) # start byte
-            for joint_angle in cmdData:     # J1,J2,J3,J4,J5,J6
-                output.append(joint_angle)
-
-            check_sum = 0
-            for num in output[1:]:    # check sum
-                check_sum ^= num
-
-            output.append(check_sum)
-            output.append(0xca) # end byte
-
-            string = ''
-            for i in output:
-                string += struct.pack('!B',i)
-            self.robotSerial.Write(string)
-            rate.sleep()
-
-        else:
-            rospy.error("robot is in action")
-
-    def startSerialPort(self):
-        rospy.loginfo("Serial Data Gateway starting . . .")
-        self.robotSerial.Start()
-        rospy.Subscriber("cmd_vel", String, self._handle_robot_command)
 #-------------------------------------------------------------------------------
     def broadcastTF(self,data=None):
-        x, y, theta = 1, 1, radians(5)
+        x, y, theta = self.sim_x, self.sim_y, self.sim_yaw
         # translation, orientation, time, child, parent
         self.tfBroadcaster.sendTransform((0, 0, 0),
                          quaternion_from_euler(0, 0, 0),
@@ -89,13 +63,13 @@ class Robot(object):
         odom.header.seq = 0
         odom.header.stamp = rospy.Time.now()
         odom.header.frame_id = "odom"
-        odom.pose.pose.position.x = 1
-        odom.pose.pose.position.y = 1
+        odom.pose.pose.position.x = self.sim_x
+        odom.pose.pose.position.y = self.sim_y
         odom.pose.pose.position.z = 0.0
-        q = quaternion_from_euler(0.0 ,0.0 ,radians(5))
+        q = quaternion_from_euler(0.0 ,0.0 ,self.sim_yaw)
         odom.pose.pose.orientation = Quaternion(q[0], q[1], q[2], q[3])
-        odom.twist.twist.linear.x = 0
-        odom.twist.twist.angular.z = 0
+        odom.twist.twist.linear.x = self.sim_v
+        odom.twist.twist.angular.z = self.sim_w
         self.odomPublisher.publish(odom)
 
     def publishLaserScan(self,data=None):

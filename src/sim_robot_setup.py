@@ -31,12 +31,14 @@ class Robot(object):
         self.sim_x, self.sim_y, self.sim_yaw, self.sim_v, self.sim_w = 0.0, 0.0, 0.0, 0.0, 0.0    # start point
 #------------------------------simulation-------------------------------------
     def simulation(self,data):
+        # Simulation odometry!
         v, w, dt = data.linear.x, data.angular.z, 0.1
-        self.sim_x += (v*dt)*cos(w*dt)
-        self.sim_y += (v*dt)*sin(w*dt)
+        self.sim_x += (v*dt)*cos(self.sim_yaw*dt)
+        self.sim_y += (v*dt)*sin(self.sim_yaw*dt)
         self.sim_yaw += w*dt
         self.sim_v = v
         self.sim_w = w
+        rospy.loginfo("x:%.2f y:%.2f theta:%.2f v:%.2f w:%.2f"%(self.sim_x,self.sim_y,self.sim_yaw,self.sim_v,self.sim_w))
 
 #-------------------------------------------------------------------------------
     def broadcastTF(self,data=None):
