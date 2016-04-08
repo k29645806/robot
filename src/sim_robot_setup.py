@@ -52,7 +52,7 @@ class Robot(object):
                          rospy.Time.now(),
                          "base_link",
                          "odom")
-        self.tfBroadcaster.sendTransform((0.2, 0, 0.5),
+        self.tfBroadcaster.sendTransform((0.0, 0.0, 0.5),
                          quaternion_from_euler(0, 0, 0),
                          rospy.Time.now(),
                          "base_laser",
@@ -79,14 +79,13 @@ class Robot(object):
         num_readings = 100
         laser_frequency = 40
         scan.header.frame_id = "base_laser"
-        scan.angle_min = radians(-90)
-        scan.angle_max = radians(90)
-        scan.angle_increment = radians(180) / num_readings
+        scan.angle_min = radians(-30)
+        scan.angle_max = radians(30)
+        scan.angle_increment = radians(60) / num_readings
         scan.time_increment = (1 / laser_frequency) / (num_readings)
-        scan.scan_time = 0.05
         scan.range_min = 0.5
         scan.range_max = 6
-        scan.ranges = [3]*num_readings
+        scan.ranges = [5]*num_readings
         self.laserScanPublisher.publish(scan)
 
     def start(self):
