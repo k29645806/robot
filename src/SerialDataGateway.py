@@ -77,6 +77,7 @@ class SerialDataGateway(object):
             rospy.loginfo("SERIAL PORT Write Error")
             raise
 
+'''
 if __name__ == '__main__':
     dataReceiver = SerialDataGateway("/dev/ttyACM0", 9600)
     dataReceiver.Start()
@@ -89,3 +90,4 @@ if __name__ == '__main__':
     dataReceiver.Stop()
 
     #dataReceiver.Stop()
+'''
