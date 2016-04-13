@@ -27,7 +27,7 @@ class Robot(object):
         port = rospy.get_param("~port", "/dev/ttyACM0")
         baud_rate = int(rospy.get_param("~baudRate", 115200))
         self.robotSerial = SerialDataGateway(port, baud_rate, self._handle_received_line)
-        rospy.Subscriber("cmd_vel", Twist, self.simulation)
+        rospy.Subscriber("cmd_vel", Twist, self.pub_cmd_vel)
         self.x, self.y, self.yaw, self.v, self.w = 0.0, 0.0, 0.0, 0.0, 0.0    # start point
 #------------------------------handle serial command--------------------------
     def _handle_received_line(self,data):
@@ -39,6 +39,14 @@ class Robot(object):
             self.x, self.y, self.yaw, self.w, self.v = robotState
         except:
             pass
+    def pub_cmd_vel(self,data,b=0.8):
+        v, w = data.linear.x, data.angular.z
+        # cvt center v and w to vl and vr
+        vr = v + b/2*w
+        vl = v - b/2*w
+        cmd = "spd %d %d"%(vl,vr)   # 0~480
+        #print cmd
+        #self.robotSerial.Write(cmd)
 
 #------------------------------simulation-------------------------------------
     def simulation(self,data):
@@ -119,8 +127,23 @@ class Robot(object):
                 rate.sleep()
             finally:
                 self.robotSerial.Stop()
-
+    def testScript(self):
+        rate = rospy.Rate(10.0)
+        rospy.loginfo("Robot Engine Start")
+        #self.robotSerial.Start()
+        #self.robotSerial.Write("start")
+        while not rospy.is_shutdown():
+            try:
+                #self.broadcastTF()
+                #self.publishOdometry()
+                #self.publishLaserScan()
+                #self.logInfo()
+                rate.sleep()
+            finally:
+                #self.robotSerial.Write("stop")
+                #self.robotSerial.Stop()
+                pass
 
 if __name__ == '__main__':
     kai = Robot()
-    kai.start()
+    kai.testScript()
