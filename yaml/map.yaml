@@ -1,4 +1,4 @@
-image: /home/kai/catkin_ws/src/robot/map/map_fake.png  # 500*500
+image: /home/kai/catkin_ws/src/robot/map/map_fake.png  # 100*100
 resolution: 0.04   # meter/pixel   100*100
 origin: [0.0, 0.0, 0.0]
 occupied_thresh: 0.65

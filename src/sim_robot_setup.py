@@ -87,7 +87,7 @@ class Robot(object):
         scan.time_increment = (1 / laser_frequency) / (num_readings)
         scan.range_min = 0.5
         scan.range_max = 6
-        scan.ranges = [5]*num_readings
+        scan.ranges = [2.8]*num_readings
         self.laserScanPublisher.publish(scan)
 
     def start(self):
