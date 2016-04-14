@@ -15,6 +15,6 @@
     <rosparam file="$(find robot)/yaml/base_local_planner_params.yaml" command="load" />
   </node>
 
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot)/rviz/robot_navigation.rviz"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot)/rviz/config.rviz"/>
 
 </launch>

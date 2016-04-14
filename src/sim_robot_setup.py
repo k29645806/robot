@@ -28,7 +28,7 @@ class Robot(object):
         #baud_rate = int(rospy.get_param("~baudRate", 115200))
         #self.robotSerial = SerialDataGateway(port, baud_rate, self._handle_received_line)
         rospy.Subscriber("cmd_vel", Twist, self.simulation)
-        self.sim_x, self.sim_y, self.sim_yaw, self.sim_v, self.sim_w = 0.0, 0.0, 0.0, 0.0, 0.0    # start point
+        self.sim_x, self.sim_y, self.sim_yaw, self.sim_v, self.sim_w = 1.0, 1.0, 0.0, 0.0, 0.0    # start point
 #------------------------------simulation-------------------------------------
     def simulation(self,data):
         # Simulation odometry!
@@ -91,13 +91,13 @@ class Robot(object):
         self.laserScanPublisher.publish(scan)
 
     def start(self):
-        rate = rospy.Rate(10.0)
+        rate = rospy.Rate(30.0)
         rospy.loginfo("Robot Engine Start")
         #self.startSerialPort()
         while not rospy.is_shutdown():
             self.broadcastTF()
             self.publishOdometry()
-            #self.publishLaserScan()
+            self.publishLaserScan()
             rate.sleep()
 
 
