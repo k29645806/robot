@@ -79,7 +79,7 @@ class Robot(object):
         scan.header.seq = 1
         scan.header.stamp = rospy.Time.now()
         num_readings = 100
-        laser_frequency = 20
+        laser_frequency = 10
         scan.header.frame_id = "base_laser"
         scan.angle_min = radians(-30)
         scan.angle_max = radians(30)
@@ -87,11 +87,11 @@ class Robot(object):
         scan.time_increment = (1 / laser_frequency) / (num_readings)
         scan.range_min = 0.5
         scan.range_max = 6
-        scan.ranges = [6]*num_readings
+        scan.ranges = [4]*num_readings
         self.laserScanPublisher.publish(scan)
 
     def start(self):
-        rate = rospy.Rate(20.0)
+        rate = rospy.Rate(10.0)
         rospy.loginfo("Robot Engine Start")
         #self.startSerialPort()
         while not rospy.is_shutdown():

@@ -7,6 +7,7 @@ Panels:
         - /TF1/Frames1
         - /TF1/Tree1
         - /Local Planning1
+        - /Local Planning1/Cost Cloud1
         - /Global Planning1/Planner1
       Splitter Ratio: 0.5
     Tree Height: 727
@@ -148,10 +149,10 @@ Visualization Manager:
           Color: 255; 255; 255
           Color Transformer: Intensity
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
-          Max Intensity: 9.376
+          Max Intensity: 37.496
           Min Color: 0; 0; 0
           Min Intensity: 0
           Name: Cost Cloud
@@ -164,7 +165,7 @@ Visualization Manager:
           Topic: /move_base/TrajectoryPlannerROS/cost_cloud
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
