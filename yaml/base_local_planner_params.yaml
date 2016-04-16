@@ -9,3 +9,4 @@ TrajectoryPlannerROS:
   acc_lim_y: 4
 
   holonomic_robot: true
+  publish_cost_grid_pc: trus
