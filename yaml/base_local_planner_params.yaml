@@ -10,3 +10,4 @@ TrajectoryPlannerROS:
 
   holonomic_robot: true
   publish_cost_grid_pc: false
+  meter_scoring: true
