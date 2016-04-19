@@ -10,8 +10,8 @@ def sender():
         goal = PoseStamped()
         goal.header.frame_id = "map"
         goal.header.stamp = rospy.Time.now()
-        goal.pose.position.x = 5
-        goal.pose.position.y = 15
+        goal.pose.position.x = 12
+        goal.pose.position.y = 17
         goal.pose.orientation.w = 1.0
         pub.publish(goal)
         rate.sleep()
