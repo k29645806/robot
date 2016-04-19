@@ -47,21 +47,6 @@ class Robot(object):
         cmd = "spd %d %d"%(vl,vr)   # 0~480
         #print cmd
         #self.robotSerial.Write(cmd)
-
-#------------------------------simulation-------------------------------------
-    def simulation(self,data):
-        # Simulation odometry!
-        pass
-        '''
-        v, w, dt = data.linear.x, data.angular.z, 0.1
-        self.x += (v*dt)*cos(self.yaw)
-        self.y += (v*dt)*sin(self.yaw)
-        self.yaw += w*dt
-        self.v = v
-        self.w = w
-        rospy.loginfo("x:%.2f y:%.2f theta:%.2f v:%.2f w:%.2f"%(self.x,self.y,self.yaw,self.v,self.w))
-        '''
-
 #-------------------------------------------------------------------------------
     def broadcastTF(self,data=None):
         x, y, theta = self.x, self.y, self.yaw
