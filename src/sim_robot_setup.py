@@ -23,16 +23,16 @@ class Robot(object):
         rospy.init_node('robot_setup')
         self.tfBroadcaster = tf.TransformBroadcaster()
         self.odomPublisher = rospy.Publisher('odom',Odometry, queue_size=10)
-        self.laserScanPublisher = rospy.Publisher('laserScan',LaserScan, queue_size=10)
+        #self.laserScanPublisher = rospy.Publisher('/laserScan',LaserScan, queue_size=10)
         #port = rospy.get_param("~port", "/dev/ttyACM0")
         #baud_rate = int(rospy.get_param("~baudRate", 115200))
         #self.robotSerial = SerialDataGateway(port, baud_rate, self._handle_received_line)
         rospy.Subscriber("cmd_vel", Twist, self.simulation)
-        self.sim_x, self.sim_y, self.sim_yaw, self.sim_v, self.sim_w = 1.0, 1.0, 0.0, 0.0, 0.0    # start point
+        self.sim_x, self.sim_y, self.sim_yaw, self.sim_v, self.sim_w = 3.0, 3.0, 0.0, 0.0, 0.0    # start point
 #------------------------------simulation-------------------------------------
     def simulation(self,data):
         # Simulation odometry!
-        v, w, dt = data.linear.x, data.angular.z, 0.1
+        v, w, dt = data.linear.x, data.angular.z, 0.02
         self.sim_x += (v*dt)*cos(self.sim_yaw)
         self.sim_y += (v*dt)*sin(self.sim_yaw)
         self.sim_yaw += w*dt
@@ -54,7 +54,7 @@ class Robot(object):
                          rospy.Time.now(),
                          "base_link",
                          "odom")
-        self.tfBroadcaster.sendTransform((0.0, 0.0, 0.5),
+        self.tfBroadcaster.sendTransform((0.3, 0.0, 0.0),
                          quaternion_from_euler(0, 0, 0),
                          rospy.Time.now(),
                          "base_laser",
@@ -87,7 +87,7 @@ class Robot(object):
         scan.time_increment = (1 / laser_frequency) / (num_readings)
         scan.range_min = 0.5
         scan.range_max = 6
-        scan.ranges = [4]*num_readings
+        scan.ranges = [4.5]*num_readings
         self.laserScanPublisher.publish(scan)
 
     def start(self):
@@ -97,7 +97,7 @@ class Robot(object):
         while not rospy.is_shutdown():
             self.broadcastTF()
             self.publishOdometry()
-            self.publishLaserScan()
+            #self.publishLaserScan()
             rate.sleep()
 
 

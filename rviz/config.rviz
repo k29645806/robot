@@ -6,6 +6,7 @@ Panels:
       Expanded:
         - /TF1/Frames1
         - /TF1/Tree1
+        - /Local Planning1/Costmap1
         - /Global Planning1/Planner1
       Splitter Ratio: 0.5
     Tree Height: 520
@@ -53,21 +54,9 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
-        base_footprint:
-          Value: true
         base_laser:
           Value: true
         base_link:
-          Value: true
-        camera_depth_frame:
-          Value: true
-        camera_depth_optical_frame:
-          Value: true
-        camera_link:
-          Value: true
-        camera_rgb_frame:
-          Value: true
-        camera_rgb_optical_frame:
           Value: true
         map:
           Value: true
@@ -81,17 +70,9 @@ Visualization Manager:
       Tree:
         map:
           odom:
-            base_footprint:
-              base_link:
-                base_laser:
-                  {}
-                camera_link:
-                  camera_depth_frame:
-                    camera_depth_optical_frame:
-                      {}
-                  camera_rgb_frame:
-                    camera_rgb_optical_frame:
-                      {}
+            base_link:
+              base_laser:
+                {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -171,10 +152,10 @@ Visualization Manager:
           Color: 255; 255; 255
           Color Transformer: Intensity
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
-          Max Intensity: 2.64
+          Max Intensity: 10.92
           Min Color: 0; 0; 0
           Min Intensity: 0
           Name: Cost Cloud
@@ -188,7 +169,7 @@ Visualization Manager:
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -204,9 +185,9 @@ Visualization Manager:
           Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
-          Max Intensity: 128.275
+          Max Intensity: 277.6
           Min Color: 0; 0; 0
-          Min Intensity: 43.2
+          Min Intensity: 251.2
           Name: Trajectory Cloud
           Position Transformer: XYZ
           Queue Size: 10
@@ -244,7 +225,7 @@ Visualization Manager:
             X: 0
             Y: 0
             Z: 0
-          Topic: /move_base/DWAPlannerROS/global_plan
+          Topic: /move_base/TrajectoryPlannerROS/global_plan
           Unreliable: false
           Value: true
       Enabled: true
@@ -287,6 +268,21 @@ Visualization Manager:
       Topic: /move_base/NavfnROS/plan
       Unreliable: false
       Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 25; 255; 0
+      Enabled: true
+      Line Style: Lines
+      Line Width: 0.03
+      Name: Path(local)
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Topic: /move_base/TrajectoryPlannerROS/local_plan
+      Unreliable: false
+      Value: true
     - Angle Tolerance: 0.1
       Class: rviz/Odometry
       Color: 48; 48; 48
@@ -322,7 +318,7 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.1
       Style: Flat Squares
-      Topic: /scan
+      Topic: /laserScan
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
@@ -363,22 +359,22 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 50.8018
+      Distance: 8.18463
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 2.46112
-        Y: 5.17283
-        Z: -0.422328
+        X: -0.093944
+        Y: 0.299667
+        Z: -0.419969
       Name: Current View
       Near Clip Distance: 0.01
       Pitch: 1.5698
       Target Frame: base_link
       Value: Orbit (rviz)
-      Yaw: 0.115025
+      Yaw: 6.25821
     Saved: ~
 Window Geometry:
   Displays:

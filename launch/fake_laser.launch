@@ -1,0 +1,13 @@
+<launch>
+  <include file="$(find robot)/launch/xtionpro.launch"/>
+
+  <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan">
+    <remap from="image"     to="/camera/depth_registered/image_raw"/>
+    <remap from="camera_info" to="/camera/depth_registered/camera_info"/>
+    <remap from="scan" to="/laserScan"/>
+    <param name="range_min" type="double" value="0.45"/>
+    <param name="range_max" type="double" value="5"/>
+    <param name="output_frame_id" type="string" value="base_laser"/>
+  </node>
+
+</launch>

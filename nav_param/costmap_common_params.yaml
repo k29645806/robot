@@ -1,11 +1,6 @@
-max_obstacle_height: 2.0  # 0.6 assume something like an arm is mounted on top of the robot
-
-# Obstacle Cost Shaping (http://wiki.ros.org/costmap_2d/hydro/inflation)
-# robot_radius: 0.20  # distance a circular robot should be clear of the obstacle (kobuki: 0.18)
-# footprint: [[x0, y0], [x1, y1], ... [xn, yn]]  # if the robot is not circular
+max_obstacle_height: 10.0  # 0.6
 footprint: [[0.28, 0.28],[-0.28, 0.28],[-0.28, -0.28],[0.28, -0.28]]
 
-# map_type: voxel
 
 obstacle_layer:
   enabled:              true
@@ -15,7 +10,7 @@ obstacle_layer:
   #z_voxels:             5
   #unknown_threshold:    15
   #mark_threshold:       0
-  combination_method:   1
+  #combination_method:   1
   track_unknown_space:  false    #true needed for disabling global path planning through unknown space
   obstacle_range: 6
   raytrace_range: 8
@@ -27,7 +22,7 @@ obstacle_layer:
     marking: true
     clearing: true
     min_obstacle_height: 0.0     #0.25
-    max_obstacle_height: 2.0     #0.35
+    max_obstacle_height: 10.0     #0.35
     inf_is_valid: true
 
 #cost_scaling_factor and inflation_radius were now moved to the inflation_layer ns
