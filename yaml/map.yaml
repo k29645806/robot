@@ -1,4 +1,4 @@
-image: /home/kai/catkin_ws/src/robot/map/map-1.png  # 100*100
+image: /home/erica/catkin_ws/src/robot/map/map-1.png  # 100*100
 resolution: 0.2   # meter/pixel   100*100
 origin: [0.0, 0.0, 0.0]
 occupied_thresh: 0.65
