@@ -28,24 +28,24 @@ class Robot(object):
                          rospy.Time.now(),
                          "odom",
                          "map")
-        self.tfBroadcaster.sendTransform((0, 0, 0),
+        self.tfBroadcaster.sendTransform((0, 0, 0.3),
                          quaternion_from_euler(0, 0, 0),
                          rospy.Time.now(),
                          "base_link",
                          "base_footprint")
-        self.tfBroadcaster.sendTransform((0.0, 0.0, 0.0),
+        self.tfBroadcaster.sendTransform((0.3, 0.0, 0.0),
                          quaternion_from_euler(0, 0, 0),
                          rospy.Time.now(),
                          "camera_link",
                          "base_link")
-        self.tfBroadcaster.sendTransform((0.0, 0.0, 0.0),
+        self.tfBroadcaster.sendTransform((0.3, 0.0, 0.0),
                          quaternion_from_euler(0, 0, 0),
                          rospy.Time.now(),
                          "base_laser",
                          "base_link")
 
     def start(self):
-        rate = rospy.Rate(20.0)
+        rate = rospy.Rate(50.0)
         rospy.loginfo("Robot Engine Start")
         while not rospy.is_shutdown():
             self.broadcastTF()

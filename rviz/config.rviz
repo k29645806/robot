@@ -6,7 +6,6 @@ Panels:
       Expanded:
         - /TF1/Frames1
         - /TF1/Tree1
-        - /Local Planning1/Costmap1
         - /Global Planning1/Planner1
       Splitter Ratio: 0.5
     Tree Height: 520
@@ -54,9 +53,13 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
+        base_footprint:
+          Value: true
         base_laser:
           Value: true
         base_link:
+          Value: true
+        camera_link:
           Value: true
         map:
           Value: true
@@ -70,9 +73,12 @@ Visualization Manager:
       Tree:
         map:
           odom:
-            base_link:
-              base_laser:
-                {}
+            base_footprint:
+              base_link:
+                base_laser:
+                  {}
+                camera_link:
+                  {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -155,7 +161,7 @@ Visualization Manager:
           Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
-          Max Intensity: 10.92
+          Max Intensity: 683.2
           Min Color: 0; 0; 0
           Min Intensity: 0
           Name: Cost Cloud
@@ -165,7 +171,7 @@ Visualization Manager:
           Size (Pixels): 3
           Size (m): 0.2
           Style: Flat Squares
-          Topic: /move_base/TrajectoryPlannerROS/cost_cloud
+          Topic: /move_base/DWAPlannerROS/cost_cloud
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
@@ -185,9 +191,9 @@ Visualization Manager:
           Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
-          Max Intensity: 277.6
+          Max Intensity: 4.8
           Min Color: 0; 0; 0
-          Min Intensity: 251.2
+          Min Intensity: 0
           Name: Trajectory Cloud
           Position Transformer: XYZ
           Queue Size: 10
@@ -359,16 +365,16 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 8.18463
+      Distance: 43.166
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.093944
-        Y: 0.299667
-        Z: -0.419969
+        X: -3.39168
+        Y: 7.1539
+        Z: -0.416501
       Name: Current View
       Near Clip Distance: 0.01
       Pitch: 1.5698
