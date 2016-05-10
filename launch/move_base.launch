@@ -13,9 +13,10 @@
     <rosparam file="$(find robot)/yaml/base_local_planner_params.yaml" command="load" />
     <param name="controller_frequency" type="double" value="10.0" />
     <param name="planner_frequency" type="double" value="0.0" />
-    <param name="base_local_planner" type="string" value="dwa_local_planner/DWAPlannerROS" />  <!--base_loccal_planner/TrajectoryPlannerROS-->
+    <!--param name="base_local_planner" type="string" value="dwa_local_planner/DWAPlannerROS" /-->  <!--base_loccal_planner/TrajectoryPlannerROS-->
+    <!--param name="base_local_planner" type="string" value="base_loccal_planner/TrajectoryPlannerROS" /-->
   </node>
 
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot)/rviz/config.rviz"/>
+  <!--node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot)/rviz/config.rviz"/-->
 
 </launch>
