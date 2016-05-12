@@ -11,4 +11,6 @@
 
   <include file="$(find robot)/launch/move_base.launch" />
 
+  <!--node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot)/rviz/config.rviz"/-->
+
 </launch>
