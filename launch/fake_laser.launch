@@ -6,7 +6,7 @@
     <remap from="camera_info" to="/camera/depth_registered/camera_info"/>
     <remap from="scan" to="/laserScan"/>
     <param name="range_min" type="double" value="0.45"/>
-    <param name="range_max" type="double" value="5"/>
+    <param name="range_max" type="double" value="10.0"/>
     <param name="output_frame_id" type="string" value="base_laser"/>
   </node>
 

@@ -3,6 +3,8 @@
 
   <include file="$(find robot)/launch/fake_laser.launch"/>
 
+  <include file="$(find robot)/launch/laser_filter.launch"/>
+
   <include file="$(find robot)/launch/minimal.launch"/>
 
   <include file="$(find robot)/launch/keyop.launch" />

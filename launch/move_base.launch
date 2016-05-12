@@ -17,6 +17,6 @@
     <!--param name="base_local_planner" type="string" value="base_loccal_planner/TrajectoryPlannerROS" /-->
   </node>
 
-  <!--node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot)/rviz/config.rviz"/-->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot)/rviz/config.rviz"/>
 
 </launch>
