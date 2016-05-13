@@ -23,7 +23,7 @@ class Robot(object):
         rospy.init_node('robot_setup')
         self.tfBroadcaster = tf.TransformBroadcaster()
         self.odomPublisher = rospy.Publisher('odom',Odometry, queue_size=10)
-        #self.laserScanPublisher = rospy.Publisher('/laserScan',LaserScan, queue_size=10)
+        self.laserScanPublisher = rospy.Publisher('/scan_filtered',LaserScan, queue_size=10)
         #port = rospy.get_param("~port", "/dev/ttyACM0")
         #baud_rate = int(rospy.get_param("~baudRate", 115200))
         #self.robotSerial = SerialDataGateway(port, baud_rate, self._handle_received_line)
@@ -86,8 +86,8 @@ class Robot(object):
         scan.angle_increment = radians(60) / num_readings
         scan.time_increment = (1 / laser_frequency) / (num_readings)
         scan.range_min = 0.5
-        scan.range_max = 6
-        scan.ranges = [4.5]*num_readings
+        scan.range_max = 10
+        scan.ranges = [8]*num_readings
         self.laserScanPublisher.publish(scan)
 
     def start(self):
@@ -97,7 +97,7 @@ class Robot(object):
         while not rospy.is_shutdown():
             self.broadcastTF()
             self.publishOdometry()
-            #self.publishLaserScan()
+            self.publishLaserScan()
             rate.sleep()
 
 
