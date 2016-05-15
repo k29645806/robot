@@ -1,13 +1,21 @@
 <launch>
+  <!-- Publish static tf -->
   <node pkg="robot" type="robot_setup.py" name="robot_setup"/>
 
+  <!-- Start openni2 and using depthimage_to_laserscan -->
   <include file="$(find robot)/launch/fake_laser.launch"/>
 
+  <!-- fill out abnormal values -->
   <include file="$(find robot)/launch/laser_filter.launch"/>
 
+  <!-- Kobuki start -->
   <include file="$(find robot)/launch/minimal.launch"/>
 
+  <!-- control Kobuki using keyboard -->
   <include file="$(find robot)/launch/keyop.launch" />
+
+  <!-- Run the map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find robot)/yaml/map.yaml" />
 
   <include file="$(find robot)/launch/move_base.launch" />
 

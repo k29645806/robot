@@ -50,4 +50,4 @@ costmap分成global與local在此決定兩者所共同享有的設定，例如�
 
 - control frequency 在超過5Hz時，dwa_local_planner會有無法轉彎的現象
 
-- 使用TrajectoryPlannerROS 會有在目標點不停旋轉的問題
+- 使用TrajectoryPlannerROS 會有在目標點[不停旋轉的問題](http://answers.ros.org/question/9795/tuning-navigation-robot-keeps-rotating-when-close-to-its-goal/)
