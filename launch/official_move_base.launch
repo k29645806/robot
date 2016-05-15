@@ -1,17 +1,13 @@
 <launch>
 
-  <arg name="odom_frame_id"   default="odom"/>
-  <arg name="base_frame_id"   default="base_link"/>
-  <arg name="global_frame_id" default="map"/>
-  <arg name="odom_topic" default="/odom" />
-  <arg name="laser_topic" default="/scan" />
   <arg name="custom_param_file" default="$(find turtlebot_navigation)/param/dummy.yaml"/>
   <!-- Run the map server -->
   <arg name="map_file" default="$(find robot)/yaml/map.yaml"/>
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
-  <!--- Run AMCL -->
-  <!---include file="$(find amcl)/examples/amcl_diff.launch"/-->
 
+  <node pkg="robot" type="sim_robot_setup.py" name="sim_robot_setup"/>
+
+  <!-- move_base main function -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <rosparam file="$(find robot)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
     <rosparam file="$(find robot)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />

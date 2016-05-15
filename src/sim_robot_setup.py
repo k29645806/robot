@@ -32,7 +32,7 @@ class Robot(object):
 #------------------------------simulation-------------------------------------
     def simulation(self,data):
         # Simulation odometry!
-        v, w, dt = data.linear.x, data.angular.z, 0.1
+        v, w, dt = data.linear.x, data.angular.z, 0.2
         self.sim_x += (v*dt)*cos(self.sim_yaw)
         self.sim_y += (v*dt)*sin(self.sim_yaw)
         self.sim_yaw += w*dt
