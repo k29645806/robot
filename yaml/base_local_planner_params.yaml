@@ -4,11 +4,12 @@ TrajectoryPlannerROS:
   max_vel_x: 0.5
   min_vel_x: 0.0
   max_vel_theta: 5
-  min_in_place_vel_theta: 0.4  # 0.4
+  min_in_place_vel_theta: 0.4  # 0.4   min_vel*sim_time < 2*tolerance
   acc_lim_theta: 2.0  #3.2
   acc_lim_x: 1.0
   acc_lim_y: 0.0
   holonomic_robot: false
+
 
   # Goal Tolerance Parameters
   yaw_goal_tolerance: 0.2   #0.05
@@ -17,9 +18,9 @@ TrajectoryPlannerROS:
 
 
   # Trajectory Scoring Parameters
-  meter_scoring: true
-  publish_cost_grid_pc: false
-  dwa: true
+  meter_scoring: true  # meter_scoring turn cell into meter
+  publish_cost_grid_pc: true
+  dwa: false # false when low acceleration limits
 
 DWAPlannerROS:
 

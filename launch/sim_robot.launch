@@ -1,4 +1,5 @@
 <launch>
+  <!-- Publish static tf -->
   <node pkg="robot" type="sim_robot_setup.py" name="sim_robot_setup"/>
 
   <!-- Run the map server -->

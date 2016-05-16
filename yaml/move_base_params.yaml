@@ -1,7 +1,7 @@
 # Move base node parameters. For full documentation of the parameters in this file, please see
-#
 #  http://www.ros.org/wiki/move_base
-#
+#  Basic navigation tuning guide
+#  http://wiki.ros.org/navigation/Tutorials/Navigation%20Tuning%20Guide
 shutdown_costmaps: false
 
 controller_frequency: 5.0  # 5.0

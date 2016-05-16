@@ -151,10 +151,10 @@ Visualization Manager:
           Color: 255; 255; 255
           Color Transformer: Intensity
           Decay Time: 0
-          Enabled: false
+          Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
-          Max Intensity: 683.2
+          Max Intensity: 686.4
           Min Color: 0; 0; 0
           Min Intensity: 0
           Name: Cost Cloud
@@ -168,7 +168,7 @@ Visualization Manager:
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
-          Value: false
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -186,7 +186,7 @@ Visualization Manager:
           Max Color: 255; 255; 255
           Max Intensity: 13.6
           Min Color: 0; 0; 0
-          Min Intensity: 0
+          Min Intensity: 2.4
           Name: Trajectory Cloud
           Position Transformer: XYZ
           Queue Size: 10
@@ -358,7 +358,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 32.7099
+      Distance: 20.2387
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
         Stereo Focal Distance: 1
